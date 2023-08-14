@@ -1,5 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
+import Cabecalho from './components/Cabecalho.vue'
+import Formulario from './components/Formulario.vue'
 
 const estado = reactive({
   operacao: 'soma',
@@ -69,30 +71,9 @@ const getOperacao = () => {
 
 <template>
   <div class="container">
-    <header class="p-5 mb-4 mt-4 bg-primary-subtle rounded-3">
-      <h1>Calculadora Aritimética</h1>
-    </header>
+    <Cabecalho/>
 
-    <form>
-      <div class="row">
-        <div class="col">
-          <input @keyup="evento => estado.num.num1 = evento.target.value" type="number" class="form-control" placeholder="0" > 
-        </div>
-
-        <div class="col">
-          <select @change="evento => estado.operacao = evento.target.value" class="form-control">
-            <option value="soma">Soma</option>
-            <option value="subtracao">Subtração</option>
-            <option value="divisao">Divisão</option>
-            <option value="multiplicao">Multiplição</option>
-          </select>
-        </div>
-
-        <div class="col">
-          <input @keyup="evento => estado.num.num2 = evento.target.value" type="number" class="form-control" placeholder="0" > 
-        </div>
-      </div>
-    </form>
+    <Formulario :number1="evento => estado.num.num1 = evento.target.value" :escolheOperacao="evento => estado.operacao = evento.target.value" :number2="evento => estado.num.num2 = evento.target.value" />
 
   <h3>{{estado.num.num1}} {{ operacaoSymbol() }} {{estado.num.num2}} = {{ getOperacao() }}</h3>
 
